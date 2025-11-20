@@ -57,6 +57,8 @@ int removeCardTop(Deck* deck, Card* card);
 
 int removeCardRandom(Deck* deck, Card* card);
 
+
+/* Logan's */
 const Card* peekTop(const Deck* deck);
 
 int transferAll(Deck* dest, Deck* src);

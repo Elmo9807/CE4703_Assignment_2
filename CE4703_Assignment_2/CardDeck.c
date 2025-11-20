@@ -44,4 +44,78 @@ int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
 }
 
 
-//test file Logan
+int removeCardRandom(Deck* deck, Card* card) {
+    if (deck == NULL || deck->size == 0) {
+        return 0;
+    }
+    /* Rand pos from 0 to size-1 */
+    int posi = rand() % deck->size;
+    /* Copy card at random position */
+    *card = deck->cards[posi];
+    /* Moves cards up by one position */
+    for (int i = posi; i < deck->size - 1; i++) {
+        deck->cards[i] = deck->cards[i + 1];
+    }
+    deck->size--;
+    return 1;
+}
+
+/**
+* @brief Shuffles deck randomly 
+*/
+void shuffleDeck(Deck* deck) {
+    /* Checks if deck is null or no of cards is 1 */
+    if (deck == NULL || deck->size <= 1) {
+        return;
+    }
+    for (int i = deck->size - 1; i > 0; i--) {
+        int j = rand() % (i + 1);
+        /* swaps cards at position i and j */
+        Card temp = deck->cards[i]; 
+        deck->cards[i] = deck->cards[j];
+        deck->cards[j] = temp; 
+    }
+}
+
+/**
+* @brief Sorts deck in order using bubble sort 
+* Card_Compare for (rank first then suit secondary)
+*/
+void sortDeck(Deck* deck) {
+    /* Checks if deck is null or no of cards is 1 */
+    if (deck == NULL || deck->size <= 1) { 
+        return; 
+    }
+    /* Bubble Sort */
+    for (int i = 0; i < deck->size - 1; i++) {
+        for (int j = 0; j < deck->size - i - 1; j++) {
+            /* Compares card rank and suit */
+            if (Card_compare(&deck->cards[j], &deck->cards[j + 1]) > 0) {
+                /* Uses temp to swap */
+                Card temp = deck->cards[j];
+                deck->cards[j] = deck->cards[j + 1];
+                deck->cards[j + 1] = temp;
+            }
+        }
+    }
+}
+
+/**
+* @brief Prints all in deck 
+*/
+void printDeck(const Deck* deck) { 
+    /* If deck == 0 then returns empty */
+    if (deck->size == 0) {
+        printf("Deck is empty\n");
+        return;
+    }
+    /* Iterates through deck of cards and prints */
+    printf(("Deck (%d cards): \n"), deck->size);
+    for (int i = 0; i < deck->size; i++) {
+        printf(" [%d] ", i);
+        Card_print(&deck->cards[i]);
+        printf("\n");
+    }
+}
+
+//test file 
