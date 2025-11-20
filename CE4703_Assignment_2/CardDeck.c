@@ -42,10 +42,10 @@ int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
 
     return deck->size; /*Returns deck size*/
 }
+
 /**
 * @brie Find and remove specific card 
 */
-
 int findAndRemove(Deck* deck, const Card* target) {
     /* Search for the target */
     for (int i = 0; i < deck->size; i++) {
