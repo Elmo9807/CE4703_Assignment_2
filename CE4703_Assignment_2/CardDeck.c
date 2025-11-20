@@ -42,6 +42,25 @@ int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
 
     return deck->size; /*Returns deck size*/
 }
+/**
+* @brie Find and remove specific card 
+*/
+
+int findAndRemove(Deck* deck, const Card* target) {
+    /* Search for the target */
+    for (int i = 0; i < deck->size; i++) {
+        if (Card_compare(&deck->cards[i], target) == 0) {
+            /* Found card then shifts cards down */
+            for (int j = i; j < deck->size - 1; j++) {
+                deck->cards[j] = deck->cards[j + 1];
+            }
+            deck->size--;
+            return 1;
+        }
+    }
+    /* Returns 0 if card not found */
+    return 0;
+}
 
 
 /**
