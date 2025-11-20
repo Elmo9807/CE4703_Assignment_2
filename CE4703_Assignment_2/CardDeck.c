@@ -44,30 +44,17 @@ int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
 }
 
 
-int removeCardRandom(Deck* deck, Card* card) {
-    if (deck == NULL || deck->size == 0) {
-        return 0;
-    }
-    /* Rand pos from 0 to size-1 */
-    int posi = rand() % deck->size;
-    /* Copy card at random position */
-    *card = deck->cards[posi];
-    /* Moves cards up by one position */
-    for (int i = posi; i < deck->size - 1; i++) {
-        deck->cards[i] = deck->cards[i + 1];
-    }
-    deck->size--;
-    return 1;
+/**
+* @brief Peeks at top card
+*/
+const Card* peekTop(const Deck* deck) {
+    return &deck->cards[deck->size - 1];
 }
 
 /**
 * @brief Shuffles deck randomly 
 */
-void shuffleDeck(Deck* deck) {
-    /* Checks if deck is null or no of cards is 1 */
-    if (deck == NULL || deck->size <= 1) {
-        return;
-    }
+void shuffleDeck(Deck* deck) {  
     for (int i = deck->size - 1; i > 0; i--) {
         int j = rand() % (i + 1);
         /* swaps cards at position i and j */
