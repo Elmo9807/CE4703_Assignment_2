@@ -16,6 +16,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+
 #include "CardDeck.h"
 #include "Card.h"
 
@@ -43,6 +44,64 @@ int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
     return deck->size; /*Returns deck size*/
 }
 
+void destroyDeck(Deck** deck){ /*Function to destroy deck*/
+    if (deck == NULL || *deck == NULL) { 
+        return;
+}
+    free((*deck)->cards); /*Freeing cards array*/
+    free(*deck); /*Freeing deck structure*/
+    *deck = NULL; /*Setting pointer to NULL*/
+}
+
+int addCardTop(Deck* deck, Card card) {
+    /*Function to add card to top of deck*/
+    if (deck == NULL || deck->size >= deck->capacity) {
+        return 0; /*Returns 0 if deck is either NULL or full*/
+    }
+    deck->cards[deck->size] = card; /*Adds cards to top of deck*/
+    deck->size++; /*Increases size of deck*/
+    return 1; /*Returns 1 if successful*/
+
+}
+
+int addCardRandom(Deck* deck, Card card) {
+    if (deck == NULL || deck->size >= deck->capacity) {
+        return 0; /*Returns 0 if deck is either NULL or full*/
+    }
+    int pos = random() % (deck->size + 1); /*Generates random position for insertion*/
+    for (int i = deck->size; i > pos; i--) {
+        deck->cards[i] = deck->cards[i - 1]; /*Shifts cards to make space*/
+
+    }
+    deck->cards[pos] = card; /*Inserts card at random position*/
+    deck->size++; /*Increases size of deck*/
+    return 1; /*Returns 1 if successful*/
+}
+
+
+int removeCardTop(Deck* deck, Card* card) {
+    if (deck == NULL || deck->size >= deck->capacity) {
+        return 0; /* Returns 0 if the deck is either NULL or full*/
+    }
+    *card = deck->cards[deck->size - 1]; /*Removes card from top of the deck*/
+    deck->size--; /*Decreases size of the deck*/
+    return 1; /*Returns 1 if successful*/
+}
+
+int removeCardRandom(Deck* deck, Card* card) {
+    if (deck == NULL || deck->size >= deck->capacity) {
+        return 0; /* Returns 0 if deck is NULL or full*/
+    }
+    int pos = random() % deck->size; /*Generates random posit*/
+    for (int i = pos; i < deck->size - 1; i++) {
+        deck->cards[i] = deck->cards[i + 1]; /*Shifts cards to fill the gap*/
+        deck->size--; /*Decreases size of the deck*/
+    }
+}
+
+
+
+
 /**
 * @brie Find and remove specific card 
 */
@@ -61,6 +120,8 @@ int findAndRemove(Deck* deck, const Card* target) {
     /* Returns 0 if card not found */
     return 0;
 }
+
+
 
 
 /**
@@ -104,6 +165,22 @@ void sortDeck(Deck* deck) {
             }
         }
     }
+}
+
+int transferAll(Deck* dest, Deck* src) {
+    if (dest == NULL || src == NULL) {
+        return 0; /* Returns 0 if either deck is NULL */
+    }
+    if (dest->size + src->size > dest->capacity) {
+        return 0; /*Returns 0 if the dest. deck does not have enough capacity*/
+    }
+    for (int i = 0; i < src->size; i++) {
+        dest->cards[dest->size + i] = src->cards[i]; /*Transfers the cards from src to dest.*/
+    }
+    dest->size += src->size; /*Updates the size of the dest.*/
+    dest->size = 0; /*Empties the src. deck*/
+    return 1; /*Returns 1 if successful*/
+
 }
 
 /**
