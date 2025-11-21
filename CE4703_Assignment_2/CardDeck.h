@@ -1,9 +1,10 @@
 /**
  * @file CardDeck.h
  * @brief Header file for CardDeck data type
- * @author 'ADD YOUR NAME HERE'
+ * @author "ADD YOUR NAME HERE"
+ * @author Finnian Berry
  *
- * @date ADD YOUR COMPLETION DATA HERE
+ * @date 21/11/2025
  *
  * Group_1_Assignment_2
  * 
@@ -43,24 +44,73 @@ typedef struct {
     int capacity;       /* Maximum capacity of the deck */
 } Deck;
 
+/**
+*@brief Creates a new empty deck with a specified capacity.
+* @param capacity The max number of cards the deck can hold.
+* @return Pointer to the newly created deck, or NULL on failure.
+*/
 Deck* createDeck(int capacity);
 
+
+/**
+*@brief Gets the current number of cards in the deck.
+* @param Pointer to the deck.
+* @return The number of cards in the deck, or -1 if the deck is NULL.
+*/
 int getDeckSize(const Deck* deck);
 
+/**
+*@brief Destroys the deck and frees all associated memory.
+*@param deck Double pointer to the deck to be destroyed.
+* @return void.
+*/
 void destroyDeck(Deck** deck);
 
+
+/**
+*@brief Adds a card to the top of the deck.
+* @param deck Pointer to the deck cards will be added to.
+* @param card The card that will be added.
+* @return 1 if the card was added successfully, 0 otherwise.
+*/
 int addCardTop(Deck* deck, Card card);
 
+
+/**
+*@brief Adds a card to a random position in the deck.
+* @param deck Pointer to the deck cards will be randomly added to.
+* @param card The card that will be added.
+* @return 1 if the card was added successfully, 0 otherwise.
+*/
 int addCardRandom(Deck* deck, Card card);
 
+
+/**
+*@brief Removes a card from the top of the deck.
+*@param deck Pointer to the deck cards will be removed from.
+* @param card Pointer to the card that will be removed.
+* @return 1 if the card was removed successfully, 0 otherwise.
+*/
 int removeCardTop(Deck* deck, Card* card);
 
+/**
+*@brief Removes a card from a random position in the deck.
+* @param deck Pointer to the deck cards will be randomly removed from.
+* @param card Pointer to the cardd that will be removed.
+* @return 1 if the card was removed successfully, 0 otherwise.
+*/
 int removeCardRandom(Deck* deck, Card* card);
 
 
 /* Logan's */
 const Card* peekTop(const Deck* deck);
 
+/**
+*@brief Transfers all cards from source deck to destination deck and clears source deck.
+* @param dest Pointer to the destination deck.
+* @param src Pointer to the source deck.
+* @return 1 if the transfer was successful, 0 otherwise.
+*/
 int transferAll(Deck* dest, Deck* src);
 
 int findAndRemove(Deck* deck, const Card* target);

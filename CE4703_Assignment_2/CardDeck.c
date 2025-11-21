@@ -1,9 +1,10 @@
 /**
  * @file CardDeck.c
  * @brief Implementation of CardDeck data type operations
- * @author 'ADD YOUR NAME HERE'
+ * @author "ADD YOUR NAME HERE"
+ * @author Finnian Berry
  *
- * @date ADD YOUR COMPLETION DATA HERE
+ * @date 21/11/2025
  * 
  * Group_1_Assignment_2
  * Remind Team Person 2: CardDeck example
