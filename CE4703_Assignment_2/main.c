@@ -1,7 +1,8 @@
 /**
  * @file main.c
  * @brief Main file for the card game implementation
- * @author Dylan OHalloran
+ * 
+ * @author Dylan O'Halloran
  * @author Xinyue Chang
  * @author 'ADD YOUR NAME HERE'
  * @author 'ADD YOUR NAME HERE'
@@ -30,5 +31,3 @@ int main(void)
 
 	return 0;
 }
-
-// repo push test comment, you can remove this whenever you want

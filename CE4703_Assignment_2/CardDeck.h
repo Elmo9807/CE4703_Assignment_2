@@ -1,8 +1,9 @@
 /**
  * @file CardDeck.h
  * @brief Header file for CardDeck data type
- * @author "ADD YOUR NAME HERE"
+ *
  * @author Finnian Berry
+ * @author Logan Fan
  *
  * @date 21/11/2025
  *
@@ -14,14 +15,14 @@
  * If can not use dynamic array, use linked list 
  *
  * The CardDeck data structure consists of:
- * 1.
- * 2.
- * 3.
+ * 1. Dynamic array of Card structures
+ * 2. Current size (number of cards in the deck)
+ * 3. Maximum capacity (can be expanded dynamically)
  *
  * Operations supported include:
- * 1.Adding and removing cards
- * 2.
- * 3.
+ * 1. Adding and removing cards from either top or random position
+ * 2. Shuffling and sorting
+ * 3. Transferring cards between decks
  */
 
 

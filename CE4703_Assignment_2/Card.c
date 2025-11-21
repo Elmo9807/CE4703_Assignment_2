@@ -1,6 +1,7 @@
 /**
  * @file Card.c
  * @brief Implementation of Card data type operations
+ * 
  * @author Xinyue Chang
  *
  * @date 17/11/2025

@@ -1,8 +1,10 @@
 /**
  * @file CardDeck.c
  * @brief Implementation of CardDeck data type operations
- * @author "ADD YOUR NAME HERE"
- * @author Finnian Berry
+ *
+ * @author Finnian Berry [Primary]
+ * @author Logan Fan [Secondary]
+ * @author Dylan O'Halloran [Debugging, dynamic memory allocations]
  *
  * @date 21/11/2025
  * 
@@ -16,7 +18,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-
 
 #include "CardDeck.h"
 #include "Card.h"
@@ -58,21 +59,34 @@ void destroyDeck(Deck** deck){ /*Function to destroy deck*/
 }
 
 int addCardTop(Deck* deck, Card card) {
+
     /*Function to add card to top of deck*/
-    if (deck == NULL || deck->size >= deck->capacity) {
-        return 0; /*Returns 0 if deck is either NULL or full*/
+    /* Expand capacity if needed */
+    if (deck->size >= deck->capacity) {
+        int newCapacity = deck->capacity * 2;
+        if (newCapacity < 1) {
+            newCapacity = 52;
+        }
+
+        Card* newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
+        if (newCards == NULL) {
+            return 0;
+        }
+
+        deck->cards = newCards;
+        deck->capacity = newCapacity;
     }
+
     deck->cards[deck->size] = card; /*Adds cards to top of deck*/
     deck->size++; /*Increases size of deck*/
     return 1; /*Returns 1 if successful*/
-
 }
 
 int addCardRandom(Deck* deck, Card card) {
     if (deck == NULL || deck->size >= deck->capacity) {
         return 0; /*Returns 0 if deck is either NULL or full*/
     }
-    int pos = random() % (deck->size + 1); /*Generates random position for insertion*/
+    int pos = rand() % (deck->size + 1); /*Generates random position for insertion*/
     for (int i = deck->size; i > pos; i--) {
         deck->cards[i] = deck->cards[i - 1]; /*Shifts cards to make space*/
 
@@ -84,8 +98,8 @@ int addCardRandom(Deck* deck, Card card) {
 
 
 int removeCardTop(Deck* deck, Card* card) {
-    if (deck == NULL || deck->size >= deck->capacity) {
-        return 0; /* Returns 0 if the deck is either NULL or full*/
+    if (deck == NULL || card == NULL || deck->size <= 0) {
+        return 0; /* Returns 0 if the deck is either NULL or empty*/
     }
     *card = deck->cards[deck->size - 1]; /*Removes card from top of the deck*/
     deck->size--; /*Decreases size of the deck*/
@@ -93,18 +107,22 @@ int removeCardTop(Deck* deck, Card* card) {
 }
 
 int removeCardRandom(Deck* deck, Card* card) {
-    if (deck == NULL || deck->size >= deck->capacity) {
+
+    if (deck == NULL || card == NULL || deck->size <= 0) {
         return 0; /* Returns 0 if deck is NULL or full*/
     }
-    int pos = random() % deck->size; /*Generates random posit*/
+
+    int pos = rand() % deck->size; /*Generates random posit*/
+
+    *card = deck->cards[pos];
+
     for (int i = pos; i < deck->size - 1; i++) {
         deck->cards[i] = deck->cards[i + 1]; /*Shifts cards to fill the gap*/
-        deck->size--; /*Decreases size of the deck*/
     }
+
+    deck->size--; /*Decreases size of the deck || [Dylan's Comment->] important to do this outside the loop or we decrement the deck size too much */
+    return 1;
 }
-
-
-
 
 /**
 * @brief Find and remove specific card 
@@ -125,13 +143,13 @@ int findAndRemove(Deck* deck, const Card* target) {
     return 0;
 }
 
-
-
-
 /**
 * @brief Peeks at top card
 */
 const Card* peekTop(const Deck* deck) {
+    if (deck == NULL || deck->size == 0) {
+        return NULL;
+    }
     return &deck->cards[deck->size - 1];
 }
 
@@ -175,16 +193,27 @@ int transferAll(Deck* dest, Deck* src) {
     if (dest == NULL || src == NULL) {
         return 0; /* Returns 0 if either deck is NULL */
     }
+
+    /* Expand deck capacity if needed */
     if (dest->size + src->size > dest->capacity) {
-        return 0; /*Returns 0 if the dest. deck does not have enough capacity*/
+        int newCapacity = dest->size + src->size;
+        Card* newCards = (Card*)realloc(dest->cards, newCapacity * sizeof(Card));
+        if (newCards == NULL) {
+            return -1;
+        }
+        dest->cards = newCards;
+        dest->capacity = newCapacity;
     }
+
+    /* Card transfer logic */
     for (int i = 0; i < src->size; i++) {
         dest->cards[dest->size + i] = src->cards[i]; /*Transfers the cards from src to dest.*/
     }
-    dest->size += src->size; /*Updates the size of the dest.*/
-    dest->size = 0; /*Empties the src. deck*/
-    return 1; /*Returns 1 if successful*/
 
+    int transferred = src->size;
+    dest->size += src->size; /*Updates the size of the dest.*/
+    src->size = 0; /*Empties the src. deck*/
+    return transferred; /*Returns transferred if successful*/
 }
 
 /**
@@ -204,5 +233,3 @@ void printDeck(const Deck* deck) {
         printf("\n");
     }
 }
-
-//test file 
