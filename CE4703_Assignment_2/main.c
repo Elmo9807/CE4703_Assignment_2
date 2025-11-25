@@ -4,7 +4,7 @@
  * 
  * @author Dylan O'Halloran
  * @author Xinyue Chang
- * @author 'ADD YOUR NAME HERE'
+ * @author Hugh Murnane
  * @author 'ADD YOUR NAME HERE'
  * @author 'ADD YOUR NAME HERE'
  * @date ADD YOUR COMPLETION DATA HERE
@@ -25,9 +25,13 @@
 int main(void)
 
 {
-	Game_init(1);
-	Game_play();
-	Game_cleanup();
+    int players;
 
-	return 0;
+    printf("Welcome to our simple Card Game!\n");
+    printf("Enter number of players: ");
+    scanf_s("%d", &players);
+
+    startGame(players);
+
+    return 0;
 }
