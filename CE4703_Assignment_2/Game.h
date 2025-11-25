@@ -2,9 +2,9 @@
  * @file Game.h
  * @brief
  * 
- * @author 'ADD YOUR NAME HERE'
+ * @author Hugh Murnane
  * 
- * @date ADD YOUR COMPLETION DATA HERE
+ * @date 25/22/2025
  *
  * Group_1_Assignment_2
  */
