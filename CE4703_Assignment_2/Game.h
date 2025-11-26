@@ -1,6 +1,6 @@
 /**
  * @file Game.h
- * @brief
+ * @brief Header file for game logic and gameplay functions
  * 
  * @author Hugh Murnane
  * @author Dylan O'Halloran
