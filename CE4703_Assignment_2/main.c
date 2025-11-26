@@ -27,11 +27,9 @@
   * 
   * @return 0 on success
   */
-int main(void)
-
+int main(int argc, char *argv[])
 {
     int players, packs;
-    char playAgain = 'N';
 
     printf("Welcome to the game, hope you have fun, pray for no memory leaks!\n");
 
@@ -46,6 +44,8 @@ int main(void)
         }
     } while (packs < 1);
 
+    printf("Number of packs selected: %d\n", packs);
+
     /* Player input with validation */
     do {
         printf("Enter number of players (2-%d): ", MAX_PLAYERS);
@@ -57,10 +57,13 @@ int main(void)
         }
     } while (players < 2 || players > MAX_PLAYERS);
 
+    printf("Number of players selected: %d\n", players);
+
     /* Start game */
     printf("\nStarting game...\n");
     startGame(players, packs);
 
     printf("\nThank you for playing, hope you had fun.\n");
+
     return 0;
 }
