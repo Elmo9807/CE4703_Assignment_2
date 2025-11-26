@@ -4,6 +4,7 @@
  *
  * @author Finnian Berry
  * @author Logan Fan
+ * @author Dylan O'Halloran
  *
  * @date 21/11/2025
  *
@@ -103,7 +104,11 @@ int removeCardTop(Deck* deck, Card* card);
 int removeCardRandom(Deck* deck, Card* card);
 
 
-/* Logan's */
+/**
+ * @brief Peek at the top card without removing it
+ * @param deck Pointer to the deck
+ * @return Pointer to the top card, or NULL if deck is empty
+ */
 const Card* peekTop(const Deck* deck);
 
 /**
@@ -114,12 +119,30 @@ const Card* peekTop(const Deck* deck);
 */
 int transferAll(Deck* dest, Deck* src);
 
+/**
+ * @brief Find and remove a specific card from the deck
+ * @param deck Pointer to the deck
+ * @param target Pointer to the card to find and remove
+ * @return 1 if card was found and removed, 0 otherwise
+ */
 int findAndRemove(Deck* deck, const Card* target);
 
+/**
+ * @brief Shuffle the deck randomly using Fisher-Yates algorithm
+ * @param deck Pointer to the deck to shuffle
+ */
 void shuffleDeck(Deck* deck);
 
+/**
+ * @brief Sort the deck using Bubble Sort (rank primary, suit secondary)
+ * @param deck Pointer to the deck to sort
+ */
 void sortDeck(Deck* deck);
 
+/**
+ * @brief Print all cards in the deck to console
+ * @param deck Pointer to the deck to print
+ */
 void printDeck(const Deck* deck);
 
-#endif /* DECK_H */
+#endif

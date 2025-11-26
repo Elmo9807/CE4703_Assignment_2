@@ -83,9 +83,24 @@ int addCardTop(Deck* deck, Card card) {
 }
 
 int addCardRandom(Deck* deck, Card card) {
-    if (deck == NULL || deck->size >= deck->capacity) {
-        return 0; /*Returns 0 if deck is either NULL or full*/
+    if (deck == NULL) {
+        return 0; /*Returns 0 if deck is NULL */
     }
+
+    /* Capacity expansion added - Dylan O'Halloran */
+    if (deck->size >= deck->capacity) {
+        int newCapacity = deck->capacity * 2;
+        if (newCapacity < 1) {
+            newCapacity = 52;
+        }
+        Card* newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
+        if (newCards == NULL) {
+            return 0;
+        }
+        deck->cards = newCards;
+        deck->capacity = newCapacity;
+    }
+
     int pos = rand() % (deck->size + 1); /*Generates random position for insertion*/
     for (int i = deck->size; i > pos; i--) {
         deck->cards[i] = deck->cards[i - 1]; /*Shifts cards to make space*/
