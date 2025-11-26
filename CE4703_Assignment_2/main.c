@@ -31,60 +31,36 @@ int main(void)
 
 {
     int players, packs;
-    char playAgain;
+    char playAgain = 'N';
 
     printf("Welcome to the game, hope you have fun, pray for no memory leaks!\n");
 
-    /* Input validation loop for packs */
+    /* Pack input with validation */
     do {
-        printf("Enter number of packs you would like to play with, a pack contains 52 cards per pack.\n");
+        printf("\nEnter number of packs, minimum of 1, each pack contains 52 cards:\n ");
         if (scanf_s("%d", &packs) != 1) {
-
-            while (getchar() != '\n')
-                printf("Error: Please enter a valid number.\n\n");
+            /* Clear */
+            while (getchar() != '\n');
+            printf("Error: Invalid input.\n");
             packs = 0;
-        }
-        else if (packs < 1) {
-            printf("Error: Must enter at least 1 pack\n\n");
         }
     } while (packs < 1);
 
-    /* Input validation loop for players */
+    /* Player input with validation */
     do {
         printf("Enter number of players (2-%d): ", MAX_PLAYERS);
         if (scanf_s("%d", &players) != 1) {
             /* Clear invalid input */
             while (getchar() != '\n');
-            printf("Error: Please enter a valid number.\n\n");
+            printf("Error: Invalid input.\n");
             players = 0;
-        }
-        else if (players < 2 || players > MAX_PLAYERS) {
-            printf("Error: Must enter between 2 and %d players.\n\n", MAX_PLAYERS);
         }
     } while (players < 2 || players > MAX_PLAYERS);
 
-    /* Start game logic with validated input */
-    printf("\n");
+    /* Start game */
+    printf("\nStarting game...\n");
     startGame(players, packs);
 
-    do {
-    /* Play again prompting */
-    printf("\n");
-    printf("Would you like to play again? (Y/N)");
-
-    /* Clear leftover input */
-    while (getchar() != '\n');
-
-    /* Retrieve play again response */
-    playAgain = getchar();
-    playAgain = toupper(playAgain);
-
-    /* Clear remaining input */
-    while (getchar() != '\n');
-
-    } while (playAgain == 'Y');
-
-    printf("\nThank you for playing! Goodbye!\n");
-
+    printf("\nThank you for playing, hope you had fun.\n");
     return 0;
 }
