@@ -55,3 +55,5 @@ dkms.conf
 *.dwo
 /.vs/CE4703_Assignment_2
 
+/CE4703_Assignment_2/Doxygen/html
+/Doxygen
