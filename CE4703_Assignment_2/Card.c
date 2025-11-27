@@ -18,12 +18,12 @@
 
 void Card_toString(const Card* c, char* buf, size_t buf_size)
 {
-    /* Local arrays for names, declared static to persist for program lifetime, encapsulated in function scope, map enum values to readable names */
-    static const char* const SUIT_NAMES[] =
+    /* Local arrays for names, encapsulated in function scope, map enum values to readable names */
+    const char* const SUIT_NAMES[] =
     {
         "Club", "Spade", "Heart", "Diamond"
     };
-    static const char* const RANK_NAMES[] =
+    const char* const RANK_NAMES[] =
     {
         /* 0~1 unused so index == numeric rank */
         "", "", "Two", "Three", "Four", "Five", "Six", "Seven",
@@ -45,7 +45,7 @@ void Card_toString(const Card* c, char* buf, size_t buf_size)
     }
 
     /* Validate rank index */
-    if ((int)c->rank >= CLUB && (int)c->rank <= RANK_ACE) {
+    if ((int)c->rank >= RANK_TWO && (int)c->rank <= RANK_ACE) {
         rname = RANK_NAMES[(int)c->rank];
     }
 
