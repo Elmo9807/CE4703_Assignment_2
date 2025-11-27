@@ -40,12 +40,12 @@ void Card_toString(const Card* c, char* buf, size_t buf_size)
     const char* rname = "?";
 
     /* Validate suit index */
-    if ((int)c->suit >= 0 && (int)c->suit <= 3) {
+    if ((int)c->suit >= CLUB && (int)c->suit <= DIAMOND) {
         sname = SUIT_NAMES[(int)c->suit];
     }
 
     /* Validate rank index */
-    if ((int)c->rank >= 2 && (int)c->rank <= 14) {
+    if ((int)c->rank >= CLUB && (int)c->rank <= RANK_ACE) {
         rname = RANK_NAMES[(int)c->rank];
     }
 
