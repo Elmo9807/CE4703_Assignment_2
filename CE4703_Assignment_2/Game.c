@@ -3,7 +3,8 @@
  * @brief Creating the game that calls from Card.c and CardDeck.c
  *
  * @author Hugh Murnane
- * @date 25/11/2025
+ * @author Dylan O'Halloran
+ * @date 26/11/2025
  */
 
 #include <stdio.h>
@@ -14,9 +15,7 @@
 #include "Card.h"
 #include "CardDeck.h"
 
- /**
-  * @brief Fill a deck with a full standard set of 52 cards
-  */
+/* Fill a deck with a full standard set of 52 cards */
 void fillDeck(Deck* d, int packs)
 {
     for (int p = 0; p < packs; p++) {
@@ -31,12 +30,10 @@ void fillDeck(Deck* d, int packs)
     }
 }
 
-/**
- * @brief Reshuffle the played cards back into the hidden deck
- * except for the top played card as this card must remain on
- * the table as per the rules
- * 
- */
+/* Function to reshuffle the played cards back into the hidden deck
+ except for the top played card as this card must remain on
+ the table as per the rules */
+
 void reshuffleIntoDeck(Deck* hidden, Deck* played)
 {
     printf("\nReshuffling cards back into deck: \n");
@@ -51,9 +48,7 @@ void reshuffleIntoDeck(Deck* hidden, Deck* played)
     addCardTop(played, topCard); // Put the last played card back on the table 
 }
 
-/**
- * @brief Print a player's current hand
- */
+/* Function to print the player hand */
 void printPlayerHand(int playerNum, const Deck* hand)
 {
     printf("Player %d's hand (%d cards): ", playerNum, hand->size);
@@ -71,9 +66,7 @@ void printPlayerHand(int playerNum, const Deck* hand)
     printf("\n");
 }
 
-/**
- * @brief Start and run the card game.
- */
+/* Function to run game logic */
 void startGame(int numberPlayers, int numberPacks)
 {
     if (numberPlayers < 2 || numberPlayers > MAX_PLAYERS) { // Checking if there is the correct amountn of players

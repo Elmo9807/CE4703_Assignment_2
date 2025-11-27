@@ -6,13 +6,9 @@
  * @author Logan Fan [Secondary]
  * @author Dylan O'Halloran [Debugging, dynamic memory allocations]
  *
- * @date 21/11/2025
+ * @date 26/11/2025
  * 
  * Group_1_Assignment_2
- * Remind Team Person 2: CardDeck example
- * //  Card c;
- * //  c.rank = RANK_SEVEN;
- * //  c.suit = HEART;
  */
 
 #include <stdio.h>
@@ -87,16 +83,18 @@ int addCardRandom(Deck* deck, Card card) {
         return 0; /*Returns 0 if deck is NULL */
     }
 
-    /* Capacity expansion added - Dylan O'Halloran */
+    /* Capacity expansion added */
     if (deck->size >= deck->capacity) {
         int newCapacity = deck->capacity * 2;
         if (newCapacity < 1) {
             newCapacity = 52;
         }
-        Card* newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
+        Card* newCards = deck->cards;
+        newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
         if (newCards == NULL) {
             return 0;
         }
+        
         deck->cards = newCards;
         deck->capacity = newCapacity;
     }
@@ -139,9 +137,6 @@ int removeCardRandom(Deck* deck, Card* card) {
     return 1;
 }
 
-/**
-* @brief Find and remove specific card 
-*/
 int findAndRemove(Deck* deck, const Card* target) {
     /* Search for the target */
     for (int i = 0; i < deck->size; i++) {
@@ -158,9 +153,6 @@ int findAndRemove(Deck* deck, const Card* target) {
     return 0;
 }
 
-/**
-* @brief Peeks at top card
-*/
 const Card* peekTop(const Deck* deck) {
     if (deck == NULL || deck->size == 0) {
         return NULL;
@@ -168,9 +160,6 @@ const Card* peekTop(const Deck* deck) {
     return &deck->cards[deck->size - 1];
 }
 
-/**
-* @brief Shuffles deck randomly 
-*/
 void shuffleDeck(Deck* deck) {  
     for (int i = deck->size - 1; i > 0; i--) {
         int j = rand() % (i + 1);
@@ -181,10 +170,6 @@ void shuffleDeck(Deck* deck) {
     }
 }
 
-/**
-* @brief Sorts deck in order using bubble sort 
-* Card_Compare for (rank first then suit secondary)
-*/
 void sortDeck(Deck* deck) {
     /* Checks if deck is null or no of cards is 1 */
     if (deck == NULL || deck->size <= 1) { 
@@ -231,9 +216,6 @@ int transferAll(Deck* dest, Deck* src) {
     return transferred; /*Returns transferred if successful*/
 }
 
-/**
-* @brief Prints all in deck 
-*/
 void printDeck(const Deck* deck) { 
     /* If deck == 0 then returns empty */
     if (deck->size == 0) {

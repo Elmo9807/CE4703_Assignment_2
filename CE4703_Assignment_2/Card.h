@@ -17,7 +17,10 @@
 
 #include <stddef.h> /* size_t */
 
- /* Use numeric ranks starting at 2 to make comparisons straightforward */
+ /**
+  * @brief Enumeration for card ranks
+  * Represents ranks from Two (2) to Ace (14) using numeric values
+  */
 typedef enum 
 {
     RANK_TWO = 2,
@@ -70,7 +73,11 @@ void Card_toString(const Card* c, char* buf, size_t buf_size);
  * @param c Pointer to the card (must not be NULL)
  */
 void Card_print(const Card* c);
-/* for test */
+
+/**
+  * @brief Print a card to the console (test function)
+  * @param c Pointer to the card (must not be NULL)
+  */
 void printCard(const Card* c);
 
 /**

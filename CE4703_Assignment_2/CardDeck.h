@@ -6,7 +6,7 @@
  * @author Logan Fan
  * @author Dylan O'Halloran
  *
- * @date 21/11/2025
+ * @date 26/11/2025
  *
  * Group_1_Assignment_2
  * 
@@ -40,10 +40,16 @@
 #include "Card.h"
 #include <stddef.h>
 
+/**
+* @brief Structure representing a dynamic deck of cards
+*
+* The Deck structure uses dynamic memory allocation to support
+* any number of cards from multiple packs. 
+*/
 typedef struct {
-    Card* cards;        /* Pointer to dynamic array of cards */
-    int size;           /* Current number of cards in the deck */
-    int capacity;       /* Maximum capacity of the deck */
+    Card* cards;
+    int size; 
+    int capacity; 
 } Deck;
 
 /**
@@ -56,7 +62,7 @@ Deck* createDeck(int capacity);
 
 /**
 *@brief Gets the current number of cards in the deck.
-* @param Pointer to the deck.
+* @param deck Pointer to the deck.
 * @return The number of cards in the deck, or -1 if the deck is NULL.
 */
 int getDeckSize(const Deck* deck);

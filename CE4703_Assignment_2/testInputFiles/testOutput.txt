@@ -1,157 +1,158 @@
 Welcome to the game, hope you have fun, pray for no memory leaks!
 
 Enter number of packs, minimum of 1, each pack contains 52 cards:
-Number of packs selected: 1
+ Number of packs selected: 1
 Enter number of players (2-4): Number of players selected: 2
 
 Starting game...
 
 Initial hands:
-Player 0's hand (8 cards): Spade-Two, Spade-Six, Club-Eight, Spade-Eight, Diamond-Eight, Diamond-Ten, Heart-King, Heart-Ace
-Player 1's hand (8 cards): Heart-Two, Club-Three, Club-Five, Club-Seven, Club-Ten, Spade-Ten, Heart-Ten, Club-Queen
+Player 0's hand (8 cards): Club-Two, Diamond-Seven, Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen, Club-Ace
+Player 1's hand (8 cards): Diamond-Two, Club-Three, Spade-Four, Club-Five, Spade-Five, Club-Eight, Diamond-Eight, Spade-Nine
 
 Game starting with 2 players
-First card: Diamond-Three
+First card: Diamond-Four
 
 Player 0's turn.
-Top card: Diamond-Three
-Player 0 plays: Diamond-Eight
-Player 0's hand (7 cards): Spade-Two, Spade-Six, Club-Eight, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
+Top card: Diamond-Four
+Player 0 plays: Diamond-Seven
+Player 0's hand (7 cards): Club-Two, Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen, Club-Ace
 
 Player 1's turn.
-Top card: Diamond-Eight
-Player 1 cannot play.
-Drew card: Diamond-Jack
-Player 1's hand (9 cards): Heart-Two, Club-Three, Club-Five, Club-Seven, Club-Ten, Spade-Ten, Heart-Ten, Diamond-Jack, Club-Queen
+Top card: Diamond-Seven
+Player 1 plays: Diamond-Two
+Player 1's hand (7 cards): Club-Three, Spade-Four, Club-Five, Spade-Five, Club-Eight, Diamond-Eight, Spade-Nine
 
 Player 0's turn.
-Top card: Diamond-Eight
-Player 0 plays: Club-Eight
-Player 0's hand (6 cards): Spade-Two, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
+Top card: Diamond-Two
+Player 0 plays: Club-Two
+Player 0's hand (6 cards): Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen, Club-Ace
 
 Player 1's turn.
-Top card: Club-Eight
+Top card: Club-Two
 Player 1 plays: Club-Three
-Player 1's hand (8 cards): Heart-Two, Club-Five, Club-Seven, Club-Ten, Spade-Ten, Heart-Ten, Diamond-Jack, Club-Queen
+Player 1's hand (6 cards): Spade-Four, Club-Five, Spade-Five, Club-Eight, Diamond-Eight, Spade-Nine
 
 Player 0's turn.
 Top card: Club-Three
-Player 0 cannot play.
-Drew card: Club-Four
-Player 0's hand (7 cards): Spade-Two, Club-Four, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
+Player 0 plays: Club-Ace
+Player 0's hand (5 cards): Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen
 
 Player 1's turn.
-Top card: Club-Three
+Top card: Club-Ace
 Player 1 plays: Club-Five
-Player 1's hand (7 cards): Heart-Two, Club-Seven, Club-Ten, Spade-Ten, Heart-Ten, Diamond-Jack, Club-Queen
+Player 1's hand (5 cards): Spade-Four, Spade-Five, Club-Eight, Diamond-Eight, Spade-Nine
 
 Player 0's turn.
 Top card: Club-Five
-Player 0 plays: Club-Four
-Player 0's hand (6 cards): Spade-Two, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
-
-Player 1's turn.
-Top card: Club-Four
-Player 1 plays: Club-Seven
-Player 1's hand (6 cards): Heart-Two, Club-Ten, Spade-Ten, Heart-Ten, Diamond-Jack, Club-Queen
-
-Player 0's turn.
-Top card: Club-Seven
 Player 0 cannot play.
-Drew card: Club-Nine
-Player 0's hand (7 cards): Spade-Two, Spade-Six, Spade-Eight, Club-Nine, Diamond-Ten, Heart-King, Heart-Ace
-
-Player 1's turn.
-Top card: Club-Seven
-Player 1 plays: Club-Ten
-Player 1's hand (5 cards): Heart-Two, Spade-Ten, Heart-Ten, Diamond-Jack, Club-Queen
-
-Player 0's turn.
-Top card: Club-Ten
-Player 0 plays: Club-Nine
-Player 0's hand (6 cards): Spade-Two, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
-
-Player 1's turn.
-Top card: Club-Nine
-Player 1 plays: Club-Queen
-Player 1's hand (4 cards): Heart-Two, Spade-Ten, Heart-Ten, Diamond-Jack
-
-Player 0's turn.
-Top card: Club-Queen
-Player 0 cannot play.
-Drew card: Club-Six
-Player 0's hand (7 cards): Spade-Two, Club-Six, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
-
-Player 1's turn.
-Top card: Club-Queen
-Player 1 cannot play.
 Drew card: Spade-Seven
-Player 1's hand (5 cards): Heart-Two, Spade-Seven, Spade-Ten, Heart-Ten, Diamond-Jack
-
-Player 0's turn.
-Top card: Club-Queen
-Player 0 plays: Club-Six
-Player 0's hand (6 cards): Spade-Two, Spade-Six, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
+Player 0's hand (6 cards): Spade-Seven, Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen
 
 Player 1's turn.
-Top card: Club-Six
-Player 1 cannot play.
-Drew card: Heart-Three
-Player 1's hand (6 cards): Heart-Two, Heart-Three, Spade-Seven, Spade-Ten, Heart-Ten, Diamond-Jack
+Top card: Club-Five
+Player 1 plays: Spade-Five
+Player 1's hand (4 cards): Spade-Four, Club-Eight, Diamond-Eight, Spade-Nine
 
 Player 0's turn.
-Top card: Club-Six
-Player 0 plays: Spade-Six
-Player 0's hand (5 cards): Spade-Two, Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
+Top card: Spade-Five
+Player 0 plays: Spade-Seven
+Player 0's hand (5 cards): Spade-Eight, Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen
 
 Player 1's turn.
-Top card: Spade-Six
-Player 1 plays: Spade-Seven
-Player 1's hand (5 cards): Heart-Two, Heart-Three, Spade-Ten, Heart-Ten, Diamond-Jack
-
-Player 0's turn.
 Top card: Spade-Seven
-Player 0 plays: Spade-Two
-Player 0's hand (4 cards): Spade-Eight, Diamond-Ten, Heart-King, Heart-Ace
-
-Player 1's turn.
-Top card: Spade-Two
-Player 1 plays: Heart-Two
-Player 1's hand (4 cards): Heart-Three, Spade-Ten, Heart-Ten, Diamond-Jack
+Player 1 plays: Spade-Four
+Player 1's hand (3 cards): Club-Eight, Diamond-Eight, Spade-Nine
 
 Player 0's turn.
-Top card: Heart-Two
-Player 0 plays: Heart-King
-Player 0's hand (3 cards): Spade-Eight, Diamond-Ten, Heart-Ace
+Top card: Spade-Four
+Player 0 plays: Spade-Eight
+Player 0's hand (4 cards): Heart-Eight, Spade-Ten, Diamond-Jack, Spade-Queen
 
 Player 1's turn.
-Top card: Heart-King
-Player 1 plays: Heart-Three
-Player 1's hand (3 cards): Spade-Ten, Heart-Ten, Diamond-Jack
+Top card: Spade-Eight
+Player 1 plays: Club-Eight
+Player 1's hand (2 cards): Diamond-Eight, Spade-Nine
 
 Player 0's turn.
-Top card: Heart-Three
-Player 0 plays: Heart-Ace
-Player 0's hand (2 cards): Spade-Eight, Diamond-Ten
+Top card: Club-Eight
+Player 0 plays: Heart-Eight
+Player 0's hand (3 cards): Spade-Ten, Diamond-Jack, Spade-Queen
 
 Player 1's turn.
-Top card: Heart-Ace
-Player 1 plays: Heart-Ten
-Player 1's hand (2 cards): Spade-Ten, Diamond-Jack
+Top card: Heart-Eight
+Player 1 plays: Diamond-Eight
+Player 1's hand (1 cards): Spade-Nine
 
 Player 0's turn.
-Top card: Heart-Ten
-Player 0 plays: Diamond-Ten
-Player 0's hand (1 cards): Spade-Eight
+Top card: Diamond-Eight
+Player 0 plays: Diamond-Jack
+Player 0's hand (2 cards): Spade-Ten, Spade-Queen
 
 Player 1's turn.
-Top card: Diamond-Ten
-Player 1 plays: Spade-Ten
-Player 1's hand (1 cards): Diamond-Jack
+Top card: Diamond-Jack
+Player 1 cannot play.
+Drew card: Heart-Nine
+Player 1's hand (2 cards): Spade-Nine, Heart-Nine
+
+Player 0's turn.
+Top card: Diamond-Jack
+Player 0 cannot play.
+Drew card: Diamond-King
+Player 0's hand (3 cards): Spade-Ten, Spade-Queen, Diamond-King
+
+Player 1's turn.
+Top card: Diamond-Jack
+Player 1 cannot play.
+Drew card: Diamond-Nine
+Player 1's hand (3 cards): Spade-Nine, Heart-Nine, Diamond-Nine
+
+Player 0's turn.
+Top card: Diamond-Jack
+Player 0 plays: Diamond-King
+Player 0's hand (2 cards): Spade-Ten, Spade-Queen
+
+Player 1's turn.
+Top card: Diamond-King
+Player 1 plays: Diamond-Nine
+Player 1's hand (2 cards): Spade-Nine, Heart-Nine
+
+Player 0's turn.
+Top card: Diamond-Nine
+Player 0 cannot play.
+Drew card: Spade-Jack
+Player 0's hand (3 cards): Spade-Ten, Spade-Jack, Spade-Queen
+
+Player 1's turn.
+Top card: Diamond-Nine
+Player 1 plays: Spade-Nine
+Player 1's hand (1 cards): Heart-Nine
+
+Player 0's turn.
+Top card: Spade-Nine
+Player 0 plays: Spade-Ten
+Player 0's hand (2 cards): Spade-Jack, Spade-Queen
+
+Player 1's turn.
+Top card: Spade-Ten
+Player 1 cannot play.
+Drew card: Club-Four
+Player 1's hand (2 cards): Club-Four, Heart-Nine
 
 Player 0's turn.
 Top card: Spade-Ten
-Player 0 plays: Spade-Eight
+Player 0 plays: Spade-Jack
+Player 0's hand (1 cards): Spade-Queen
+
+Player 1's turn.
+Top card: Spade-Jack
+Player 1 cannot play.
+Drew card: Diamond-Three
+Player 1's hand (3 cards): Diamond-Three, Club-Four, Heart-Nine
+
+Player 0's turn.
+Top card: Spade-Jack
+Player 0 plays: Spade-Queen
 Player 0's hand (0 cards): (empty)
 
  PLAYER 0 WINS! 

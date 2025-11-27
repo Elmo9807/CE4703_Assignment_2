@@ -3,10 +3,6 @@
  * @brief Main file for the card game implementation
  * 
  * @author Dylan O'Halloran
- * @author Xinyue Chang
- * @author Hugh Murnane
- * @author Logan Fan
- * @author Finnian Berry
  * @date 26/11/2025
  *
  * Group_1_Assignment_2
@@ -23,8 +19,9 @@
   * @brief
   * 
   * Prompts user for number of packs and players with validation
-  * Includes play again functionality
   * 
+  * @param argc Argument count
+  * @param argv Argument vector
   * @return 0 on success
   */
 int main(int argc, char *argv[])

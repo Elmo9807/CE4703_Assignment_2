@@ -3,53 +3,53 @@
  * @brief Implementation of Card data type operations
  * 
  * @author Xinyue Chang
+ * @author Dylan O'Halloran
  *
- * @date 17/11/2025
+ * @date 27/11/2025
  *
  * Group_1_Assignment_2
  * 
  * This file implements the operations for the Card data type.
  */
 
- /**
- * Remind Team Person Tester:
- * When you test use
- * printCard(&card);
- */
-
 #include <stdio.h>
 #include <string.h>
 #include "Card.h"
 
-  /* Local arrays for names */
-static const char* const SUIT_NAMES[] = 
-{ 
-    "Club", "Spade", "Heart", "Diamond" 
-};
-static const char* const RANK_NAMES[] = 
+void Card_toString(const Card* c, char* buf, size_t buf_size)
 {
-    /* 0~1 unused so index == numeric rank */
-    "", "", "Two", "Three", "Four", "Five", "Six", "Seven",
-    "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"
-};
+    /* Local arrays for names, declared static to persist for program lifetime, encapsulated in function scope, map enum values to readable names */
+    static const char* const SUIT_NAMES[] =
+    {
+        "Club", "Spade", "Heart", "Diamond"
+    };
+    static const char* const RANK_NAMES[] =
+    {
+        /* 0~1 unused so index == numeric rank */
+        "", "", "Two", "Three", "Four", "Five", "Six", "Seven",
+        "Eight", "Nine", "Ten", "Jack", "Queen", "King", "Ace"
+    };
 
-void Card_toString(const Card* c, char* buf, size_t buf_size){
+    /* Validate input */
     if (c == NULL || buf == NULL || buf_size == 0) {
         return;
     }
 
+    /* Default names as fallback for invalid rank or suit */
     const char* sname = "?";
     const char* rname = "?";
 
+    /* Validate suit index */
     if ((int)c->suit >= 0 && (int)c->suit <= 3) {
         sname = SUIT_NAMES[(int)c->suit];
     }
 
+    /* Validate rank index */
     if ((int)c->rank >= 2 && (int)c->rank <= 14) {
         rname = RANK_NAMES[(int)c->rank];
     }
 
-    /* safe formatting */
+    /* safe formatting, no buf overflow */
     snprintf(buf, buf_size, "%s-%s", sname, rname);
 }
 
@@ -84,6 +84,7 @@ int Card_equal(const Card* a, const Card* b)
 
 int Card_compare(const Card* a, const Card* b)
 {
+    /* Null pointer handling, consider Null less than non Null*/
     if (a == NULL || b == NULL) {
         if (a == b) {
             return 0;
@@ -91,6 +92,7 @@ int Card_compare(const Card* a, const Card* b)
         return (a == NULL) ? -1 : 1;
     }
 
+    /* Cmp rank, lower rank < higher rank */
     if (a->rank < b->rank) {
         return -1;
     }
@@ -98,7 +100,7 @@ int Card_compare(const Card* a, const Card* b)
         return 1;
     }
 
-    /* ranks equal -> compare suit order */
+    /* ranks equal -> compare suit order, CLUB < SPADE < HEART < DIAMOND */
     if (a->suit < b->suit) {
         return -1;
     }

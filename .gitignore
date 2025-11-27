@@ -57,3 +57,13 @@ dkms.conf
 
 /CE4703_Assignment_2/Doxygen/html
 /Doxygen
+
+# Build results
+x64/
+Debug/
+Release/
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.log
