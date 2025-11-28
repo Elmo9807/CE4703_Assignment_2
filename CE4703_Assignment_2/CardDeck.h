@@ -48,8 +48,8 @@
 */
 typedef struct {
     Card* cards;
-    int size; 
-    int capacity; 
+    size_t size; 
+    size_t capacity;
 } Deck;
 
 /**
@@ -57,7 +57,7 @@ typedef struct {
 * @param capacity The max number of cards the deck can hold.
 * @return Pointer to the newly created deck, or NULL on failure.
 */
-Deck* createDeck(int capacity);
+Deck* createDeck(size_t capacity);
 
 
 /**
@@ -65,7 +65,7 @@ Deck* createDeck(int capacity);
 * @param deck Pointer to the deck.
 * @return The number of cards in the deck, or -1 if the deck is NULL.
 */
-int getDeckSize(const Deck* deck);
+size_t getDeckSize(const Deck* deck);
 
 /**
 *@brief Destroys the deck and frees all associated memory.

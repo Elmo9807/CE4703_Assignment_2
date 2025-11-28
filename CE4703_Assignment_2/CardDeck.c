@@ -7,7 +7,7 @@
  * @author Dylan O'Halloran [Debugging, dynamic memory allocations]
  *
  * @date 26/11/2025
- * 
+ *
  * Group_1_Assignment_2
  */
 
@@ -18,169 +18,211 @@
 #include "CardDeck.h"
 #include "Card.h"
 
-Deck* createDeck(int capacity) { /* Function to create deck*/
-    Deck * deck = malloc(sizeof(Deck)); /*Allocating memory for deck*/
+Deck* createDeck(size_t capacity) 
+{
+    /* Allocate memory for the Deck structure itself */
+    Deck* deck = malloc(sizeof(Deck));
 
-    if (deck == NULL) { /*Checking if memory allocation was a success*/
-        return NULL;
-    }
-
-    deck->size = 0; /*Initializing size to 0*/
-    deck->capacity = capacity; /* Setting capacity as input value*/
-    deck->cards = malloc(sizeof(Card) * capacity); /*Allocating memory for cards array*/
-    
-    if (deck->cards == NULL) { /*Checking if memory allocation was successful*/
-        free(deck);
-        return NULL;
-    }
-
-    return deck; /*Returning pointer*/
-}
-
-int getDeckSize(const Deck* deck) { /*Function to get size of deck*/
-    if (deck == NULL) { /*Checking if deck is NULL*/
-        return -1;
-    }
-
-    return deck->size; /*Returns deck size*/
-}
-
-void destroyDeck(Deck** deck){ /*Function to destroy deck*/
-    if (deck == NULL || *deck == NULL) { 
-        return;
-}
-    free((*deck)->cards); /*Freeing cards array*/
-    free(*deck); /*Freeing deck structure*/
-    *deck = NULL; /*Setting pointer to NULL*/
-}
-
-int addCardTop(Deck* deck, Card card) {
-
-    /*Function to add card to top of deck*/
-    /* Expand capacity if needed */
-    if (deck->size >= deck->capacity) {
-        int newCapacity = deck->capacity * 2;
-        if (newCapacity < 1) {
-            newCapacity = 52;
-        }
-
-        Card* newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
-        if (newCards == NULL) {
-            return 0;
-        }
-
-        deck->cards = newCards;
-        deck->capacity = newCapacity;
-    }
-
-    deck->cards[deck->size] = card; /*Adds cards to top of deck*/
-    deck->size++; /*Increases size of deck*/
-    return 1; /*Returns 1 if successful*/
-}
-
-int addCardRandom(Deck* deck, Card card) {
     if (deck == NULL) {
-        return 0; /*Returns 0 if deck is NULL */
+        return NULL;  /* Memory allocation failed */
     }
 
-    /* Capacity expansion added */
+    /* Initialize deck to empty state */
+    deck->size = 0;
+    deck->capacity = capacity;
+
+    /* Allocate memory for the dynamic card array */
+    deck->cards = malloc(sizeof(Card) * capacity);
+
+    if (deck->cards == NULL) {
+        free(deck);  /* Clean up partially allocated memory */
+        return NULL;
+    }
+
+    return deck;
+}
+
+size_t getDeckSize(const Deck* deck) 
+{
+    if (deck == NULL) {
+        return 0;  /* Return 0 for NULL deck */
+    }
+
+    return deck->size;
+}
+
+void destroyDeck(Deck** deck) 
+{
+    if (deck == NULL || *deck == NULL) {
+        return;
+    }
+    free((*deck)->cards);  /* Free cards array */
+    free(*deck);           /* Free deck structure */
+    *deck = NULL;          /* Set pointer to NULL */
+}
+
+int addCardTop(Deck* deck, Card card) 
+{
+    /* Validate deck pointer */
+    if (deck == NULL) {
+        return 0;
+    }
+
+    /* Check if we need to expand capacity */
     if (deck->size >= deck->capacity) {
-        int newCapacity = deck->capacity * 2;
-        if (newCapacity < 1) {
-            newCapacity = 52;
+        /* Double the capacity for efficient amortized growth */
+        size_t newCapacity = deck->capacity * 2;
+        if (newCapacity < 52) {
+            newCapacity = 52;  /* Minimum capacity of one pack */
         }
+
+        /* Attempt to reallocate with larger capacity */
         Card* newCards = deck->cards;
         newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
         if (newCards == NULL) {
-            return 0;
+            return 0;  /* Reallocation failed - original deck unchanged */
         }
-        
+
+        /* Update deck to use new larger array */
         deck->cards = newCards;
         deck->capacity = newCapacity;
     }
 
-    int pos = rand() % (deck->size + 1); /*Generates random position for insertion*/
-    for (int i = deck->size; i > pos; i--) {
-        deck->cards[i] = deck->cards[i - 1]; /*Shifts cards to make space*/
-
-    }
-    deck->cards[pos] = card; /*Inserts card at random position*/
-    deck->size++; /*Increases size of deck*/
-    return 1; /*Returns 1 if successful*/
-}
-
-
-int removeCardTop(Deck* deck, Card* card) {
-    if (deck == NULL || card == NULL || deck->size <= 0) {
-        return 0; /* Returns 0 if the deck is either NULL or empty*/
-    }
-    *card = deck->cards[deck->size - 1]; /*Removes card from top of the deck*/
-    deck->size--; /*Decreases size of the deck*/
-    return 1; /*Returns 1 if successful*/
-}
-
-int removeCardRandom(Deck* deck, Card* card) {
-
-    if (deck == NULL || card == NULL || deck->size <= 0) {
-        return 0; /* Returns 0 if deck is NULL or full*/
-    }
-
-    int pos = rand() % deck->size; /*Generates random posit*/
-
-    *card = deck->cards[pos];
-
-    for (int i = pos; i < deck->size - 1; i++) {
-        deck->cards[i] = deck->cards[i + 1]; /*Shifts cards to fill the gap*/
-    }
-
-    deck->size--; /*Decreases size of the deck || [Dylan's Comment->] important to do this outside the loop or we decrement the deck size too much */
+    /* Add card to the top position (end of array) */
+    deck->cards[deck->size] = card;
+    deck->size++;
     return 1;
 }
 
-int findAndRemove(Deck* deck, const Card* target) {
-    /* Search for the target */
-    for (int i = 0; i < deck->size; i++) {
+int addCardRandom(Deck* deck, Card card) 
+{
+    if (deck == NULL) {
+        return 0;
+    }
+
+    /* Expand capacity if needed (same logic as addCardTop) */
+    if (deck->size >= deck->capacity) {
+        size_t newCapacity = deck->capacity * 2;
+        if (newCapacity < 52) {
+            newCapacity = 52;
+        }
+
+        /* Attempt to reallocate with larger capacity */
+        Card* newCards = deck->cards;
+        newCards = (Card*)realloc(deck->cards, newCapacity * sizeof(Card));
+        if (newCards == NULL) {
+            return 0;  /* Reallocation failed */
+        }
+        deck->cards = newCards;
+        deck->capacity = newCapacity;
+    }
+
+    /* Generate random position from 0 to size (inclusive) */
+    size_t pos = rand() % (deck->size + 1);
+
+    /* Shift all cards from pos onwards one position right */
+    for (size_t i = deck->size; i > pos; i--) {
+        deck->cards[i] = deck->cards[i - 1];
+    }
+
+    /* Insert new card at the random position */
+    deck->cards[pos] = card;
+    deck->size++;
+    return 1;
+}
+
+int removeCardTop(Deck* deck, Card* card) 
+{
+    if (deck == NULL || card == NULL || deck->size <= 0) {
+        return 0;  /* Returns 0 if the deck is either NULL or empty */
+    }
+    *card = deck->cards[deck->size - 1];  /* Removes card from top of the deck */
+    deck->size--;  /* Decreases size of the deck */
+    return 1;
+}
+
+int removeCardRandom(Deck* deck, Card* card) 
+{
+    if (deck == NULL || card == NULL || deck->size <= 0) {
+        return 0;  /* Returns 0 if deck is NULL or empty */
+    }
+
+    /* Generate random index within current deck size */
+    size_t pos = rand() % deck->size;
+
+    /* Copy the card at random position to output parameter */
+    *card = deck->cards[pos];
+
+    /* Shift all cards after pos one position left to fill gap */
+    for (size_t i = pos; i < deck->size - 1; i++) {
+        deck->cards[i] = deck->cards[i + 1];
+    }
+
+    /* Decrease size after shifting (important to do outside loop) */
+    deck->size--;
+    return 1;
+}
+
+int findAndRemove(Deck* deck, const Card* target) 
+{
+    /* Linear search through deck for matching card */
+    for (size_t i = 0; i < deck->size; i++) {
+        /* Use Card_compare to check for exact match */
         if (Card_compare(&deck->cards[i], target) == 0) {
-            /* Found card then shifts cards down */
-            for (int j = i; j < deck->size - 1; j++) {
+            /* Found the target card - now remove it by shifting */
+            for (size_t j = i; j < deck->size - 1; j++) {
                 deck->cards[j] = deck->cards[j + 1];
             }
             deck->size--;
-            return 1;
+            return 1;  /* Successfully found and removed */
         }
     }
-    /* Returns 0 if card not found */
-    return 0;
+    return 0;  /* Card not found in deck */
 }
 
-const Card* peekTop(const Deck* deck) {
+const Card* peekTop(const Deck* deck) 
+{
     if (deck == NULL || deck->size == 0) {
         return NULL;
     }
     return &deck->cards[deck->size - 1];
 }
 
-void shuffleDeck(Deck* deck) {  
-    for (int i = deck->size - 1; i > 0; i--) {
-        int j = rand() % (i + 1);
-        /* swaps cards at position i and j */
-        Card temp = deck->cards[i]; 
+void shuffleDeck(Deck* deck) 
+{
+    /* Validate deck and ensure it has cards to shuffle */
+    if (deck == NULL || deck->size <= 1) {
+        return;
+    }
+
+    /* Fisher-Yates shuffle algorithm */
+    /* Iterate backwards from last card to second card */
+    for (size_t i = deck->size - 1; i > 0; i--) {
+        /* Pick random index from 0 to i (inclusive) */
+        size_t j = rand() % (i + 1);
+
+        /* Swap cards at positions i and j */
+        Card temp = deck->cards[i];
         deck->cards[i] = deck->cards[j];
-        deck->cards[j] = temp; 
+        deck->cards[j] = temp;
     }
 }
 
-void sortDeck(Deck* deck) {
-    /* Checks if deck is null or no of cards is 1 */
-    if (deck == NULL || deck->size <= 1) { 
-        return; 
+void sortDeck(Deck* deck) 
+{
+    /* Check for invalid or trivially sorted cases */
+    if (deck == NULL || deck->size <= 1) {
+        return;
     }
-    /* Bubble Sort */
-    for (int i = 0; i < deck->size - 1; i++) {
-        for (int j = 0; j < deck->size - i - 1; j++) {
-            /* Compares card rank and suit */
+
+    /* Bubble Sort algorithm - sorts by rank (primary) then suit (secondary) */
+    /* Outer loop: number of passes through the array */
+    for (size_t i = 0; i < deck->size - 1; i++) {
+        /* Inner loop: compare adjacent elements, largest bubbles to end */
+        for (size_t j = 0; j < deck->size - i - 1; j++) {
+            /* Compare adjacent cards using Card_compare */
             if (Card_compare(&deck->cards[j], &deck->cards[j + 1]) > 0) {
-                /* Uses temp to swap */
+                /* Cards are out of order - swap them */
                 Card temp = deck->cards[j];
                 deck->cards[j] = deck->cards[j + 1];
                 deck->cards[j + 1] = temp;
@@ -189,43 +231,51 @@ void sortDeck(Deck* deck) {
     }
 }
 
-int transferAll(Deck* dest, Deck* src) {
+int transferAll(Deck* dest, Deck* src) 
+{
     if (dest == NULL || src == NULL) {
-        return 0; /* Returns 0 if either deck is NULL */
+        return 0;  /* Returns 0 if either deck is NULL */
     }
 
-    /* Expand deck capacity if needed */
+    /* Check if destination has enough capacity for all cards */
     if (dest->size + src->size > dest->capacity) {
-        int newCapacity = dest->size + src->size;
-        Card* newCards = (Card*)realloc(dest->cards, newCapacity * sizeof(Card));
+        /* Calculate exact capacity needed */
+        size_t newCapacity = dest->size + src->size;
+
+        /* Reallocate destination deck to fit all cards */
+        Card* newCards = dest->cards;
+        newCards = (Card*)realloc(dest->cards, newCapacity * sizeof(Card));
         if (newCards == NULL) {
-            return -1;
+            return -1;  /* Reallocation failed */
         }
         dest->cards = newCards;
         dest->capacity = newCapacity;
     }
 
-    /* Card transfer logic */
-    for (int i = 0; i < src->size; i++) {
-        dest->cards[dest->size + i] = src->cards[i]; /*Transfers the cards from src to dest.*/
+    /* Copy all cards from source to destination */
+    for (size_t i = 0; i < src->size; i++) {
+        dest->cards[dest->size + i] = src->cards[i];
     }
 
-    int transferred = src->size;
-    dest->size += src->size; /*Updates the size of the dest.*/
-    src->size = 0; /*Empties the src. deck*/
-    return transferred; /*Returns transferred if successful*/
+    /* Update deck sizes */
+    int transferred = (int)src->size;
+    dest->size += src->size;
+    src->size = 0;  /* Empty the source deck */
+
+    return transferred;
 }
 
-void printDeck(const Deck* deck) { 
-    /* If deck == 0 then returns empty */
+void printDeck(const Deck* deck) 
+{
+    /* If deck is empty then returns */
     if (deck->size == 0) {
         printf("Deck is empty\n");
         return;
     }
     /* Iterates through deck of cards and prints */
-    printf(("Deck (%d cards): \n"), deck->size);
-    for (int i = 0; i < deck->size; i++) {
-        printf(" [%d] ", i);
+    printf("Deck (%zu cards): \n", deck->size);  /* %zu for size_t */
+    for (size_t i = 0; i < deck->size; i++) {
+        printf(" [%zu] ", i);  /* %zu for size_t */
         Card_print(&deck->cards[i]);
         printf("\n");
     }
